@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  PYTHONPATH: ./src
+  PYTHONPATH: .
 
 jobs:
   test:
@@ -33,7 +33,7 @@ jobs:
         pip install pytest pytest-cov pytest-html flake8
 
     - name: Lint code
-      run: flake8 src/ tests/ --max-line-length=88
+      run: flake8 src/ test/ --max-line-length=88
       continue-on-error: true
 
     - name: Run tests with coverage
