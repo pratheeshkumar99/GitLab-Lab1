@@ -1,6 +1,7 @@
 import math
-from typing import List, Union, Tuple
+from typing import List, Union
 from collections import Counter
+
 
 def fun1(x, y):
     """
@@ -15,8 +16,9 @@ def fun1(x, y):
     """
     if not (isinstance(x, (int, float)) and isinstance(y, (int, float))):
         raise ValueError("Both inputs must be numbers.")
-    
+
     return x + y
+
 
 def fun2(x, y):
     """
@@ -33,6 +35,7 @@ def fun2(x, y):
         raise ValueError("Both inputs must be numbers.")
     return x - y
 
+
 def fun3(x, y):
     """
     Multiplies two numbers together.
@@ -48,6 +51,7 @@ def fun3(x, y):
         raise ValueError("Both inputs must be numbers.")
     return x * y
 
+
 def fun4(x, y, z):
     """
     Adds three numbers together.
@@ -60,11 +64,16 @@ def fun4(x, y, z):
     Raises:
         ValueError: If any input is not a number.
     """
-    if not (isinstance(x, (int, float)) and isinstance(y, (int, float)) and isinstance(z, (int, float))):
+    if not (
+        isinstance(x, (int, float))
+        and isinstance(y, (int, float))
+        and isinstance(z, (int, float))
+    ):
         raise ValueError("All inputs must be numbers.")
-    
+
     total_sum = x + y + z
     return total_sum
+
 
 def fun5(x, y):
     """
@@ -84,6 +93,7 @@ def fun5(x, y):
         raise ZeroDivisionError("Cannot divide by zero.")
     return x / y
 
+
 def fun6(base, exponent):
     """
     Raises a base to the power of an exponent with overflow protection.
@@ -98,18 +108,19 @@ def fun6(base, exponent):
     """
     if not (isinstance(base, (int, float)) and isinstance(exponent, (int, float))):
         raise ValueError("Both inputs must be numbers.")
-    
+
     # Check for potential overflow
     if abs(base) > 1 and exponent > 100:
         raise OverflowError("Result would be too large to compute safely.")
-    
+
     try:
-        result = base ** exponent
+        result = base**exponent
         if math.isinf(result):
             raise OverflowError("Result exceeds maximum float value.")
         return result
     except OverflowError:
         raise OverflowError("Result exceeds maximum float value.")
+
 
 def fun7(n):
     """
@@ -123,14 +134,15 @@ def fun7(n):
     """
     if not isinstance(n, int) or n < 0:
         raise ValueError("Input must be a non-negative integer.")
-    
+
     if n == 0 or n == 1:
         return 1
-    
+
     result = 1
     for i in range(2, n + 1):
         result *= i
     return result
+
 
 def fun8(numbers: List[Union[int, float]]):
     """
@@ -144,34 +156,39 @@ def fun8(numbers: List[Union[int, float]]):
     """
     if not numbers:
         raise ValueError("List cannot be empty.")
-    
+
     if not all(isinstance(x, (int, float)) for x in numbers):
         raise ValueError("All elements must be numbers.")
-    
+
     # Mean
     mean = sum(numbers) / len(numbers)
-    
+
     # Median
     sorted_nums = sorted(numbers)
     n = len(sorted_nums)
-    median = (sorted_nums[n//2 - 1] + sorted_nums[n//2]) / 2 if n % 2 == 0 else sorted_nums[n//2]
-    
+    median = (
+        (sorted_nums[n // 2 - 1] + sorted_nums[n // 2]) / 2
+        if n % 2 == 0
+        else sorted_nums[n // 2]
+    )
+
     # Mode (most frequent value)
     counts = Counter(numbers)
     mode = counts.most_common(1)[0][0]
-    
+
     # Variance and Standard Deviation
     variance = sum((x - mean) ** 2 for x in numbers) / len(numbers)
     std_dev = math.sqrt(variance)
-    
+
     return {
-        'mean': mean,
-        'median': median,
-        'mode': mode,
-        'std_dev': std_dev,
-        'variance': variance,
-        'count': len(numbers)
+        "mean": mean,
+        "median": median,
+        "mode": mode,
+        "std_dev": std_dev,
+        "variance": variance,
+        "count": len(numbers),
     }
+
 
 def fun9(n):
     """
@@ -185,44 +202,48 @@ def fun9(n):
     """
     if not isinstance(n, int) or n <= 0:
         raise ValueError("Input must be a positive integer.")
-    
+
     if n == 1:
         return [0]
     elif n == 2:
         return [0, 1]
-    
+
     fib_sequence = [0, 1]
     for i in range(2, n):
-        fib_sequence.append(fib_sequence[i-1] + fib_sequence[i-2])
-    
+        fib_sequence.append(fib_sequence[i - 1] + fib_sequence[i - 2])
+
     return fib_sequence
+
 
 def fun10(coefficients: List[Union[int, float]], x):
     """
     Evaluates a polynomial at a given point using Horner's method.
     Args:
-        coefficients (List[int/float]): Polynomial coefficients [a0, a1, a2, ...] for a0 + a1*x + a2*x^2 + ...
+        coefficients (List[int/float]): Polynomial coefficients [a0, a1,
+            a2, ...] for a0 + a1*x + a2*x^2 + ...
         x (int/float): Point at which to evaluate the polynomial.
     Returns:
         float: Value of polynomial at x.
     Raises:
-        ValueError: If coefficients is empty or contains non-numeric values, or x is not numeric.
+        ValueError: If coefficients is empty or contains non-numeric
+            values, or x is not numeric.
     """
     if not coefficients:
         raise ValueError("Coefficients list cannot be empty.")
-    
+
     if not all(isinstance(c, (int, float)) for c in coefficients):
         raise ValueError("All coefficients must be numbers.")
-    
+
     if not isinstance(x, (int, float)):
         raise ValueError("x must be a number.")
-    
+
     # Horner's method for efficient polynomial evaluation
     result = coefficients[-1]  # Start with highest degree coefficient
     for i in range(len(coefficients) - 2, -1, -1):
         result = result * x + coefficients[i]
-    
+
     return result
+
 
 def fun11(a, b, c):
     """
@@ -236,28 +257,35 @@ def fun11(a, b, c):
     Raises:
         ValueError: If a is zero (not quadratic) or inputs are not numeric.
     """
-    if not (isinstance(a, (int, float)) and isinstance(b, (int, float)) and isinstance(c, (int, float))):
+    if not (
+        isinstance(a, (int, float))
+        and isinstance(b, (int, float))
+        and isinstance(c, (int, float))
+    ):
         raise ValueError("All coefficients must be numbers.")
-    
+
     if a == 0:
         raise ValueError("Coefficient 'a' cannot be zero for a quadratic equation.")
-    
-    discriminant = b**2 - 4*a*c
-    
+
+    discriminant = b**2 - 4 * a * c
+
     if discriminant > 0:
         # Two distinct real roots
-        root1 = (-b + math.sqrt(discriminant)) / (2*a)
-        root2 = (-b - math.sqrt(discriminant)) / (2*a)
+        root1 = (-b + math.sqrt(discriminant)) / (2 * a)
+        root2 = (-b - math.sqrt(discriminant)) / (2 * a)
         return (root1, root2)
     elif discriminant == 0:
         # One repeated real root
-        root = -b / (2*a)
+        root = -b / (2 * a)
         return (root,)
     else:
         # No real roots (complex roots)
         return None
 
-def fun12(matrix1: List[List[Union[int, float]]], matrix2: List[List[Union[int, float]]]):
+
+def fun12(
+    matrix1: List[List[Union[int, float]]], matrix2: List[List[Union[int, float]]]
+):
     """
     Multiplies two matrices.
     Args:
@@ -271,23 +299,25 @@ def fun12(matrix1: List[List[Union[int, float]]], matrix2: List[List[Union[int, 
     # Validate inputs
     if not matrix1 or not matrix2:
         raise ValueError("Matrices cannot be empty.")
-    
+
     # Check if matrices are rectangular and contain only numbers
     rows1, cols1 = len(matrix1), len(matrix1[0])
     rows2, cols2 = len(matrix2), len(matrix2[0])
-    
+
     for row in matrix1:
         if len(row) != cols1 or not all(isinstance(x, (int, float)) for x in row):
             raise ValueError("Matrix1 must be rectangular and contain only numbers.")
-    
+
     for row in matrix2:
         if len(row) != cols2 or not all(isinstance(x, (int, float)) for x in row):
             raise ValueError("Matrix2 must be rectangular and contain only numbers.")
-    
+
     # Check compatibility for multiplication
     if cols1 != rows2:
-        raise ValueError(f"Cannot multiply {rows1}x{cols1} matrix with {rows2}x{cols2} matrix.")
-    
+        raise ValueError(
+            f"Cannot multiply {rows1}x{cols1} matrix with {rows2}x{cols2} matrix."
+        )
+
     # Perform matrix multiplication
     result = []
     for i in range(rows1):
@@ -296,5 +326,5 @@ def fun12(matrix1: List[List[Union[int, float]]], matrix2: List[List[Union[int, 
             dot_product = sum(matrix1[i][k] * matrix2[k][j] for k in range(cols1))
             row.append(dot_product)
         result.append(row)
-    
+
     return result
