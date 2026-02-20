@@ -1,8 +1,8 @@
 # MLOps Lab 1 – GitHub Actions & Python Testing
 
 ## Base Lab
-Built on top of **Lab 1** by Professor Ramin Mohammadi:
-[raminmohammadi/MLOps – Github_Labs/Lab1](https://github.com/raminmohammadi/MLOps/tree/main/Github_Labs/Lab1)
+Built on top of **Lab 1** by Professor:
+[raminmohammadi/MLOps – Github_Labs/Lab1](https://github.com/raminmohammadi/MLOps/tree/main/Labs/Github_Labs/Lab1)
 
 ---
 
@@ -54,20 +54,17 @@ cd GitLab-Lab1
 
 # 2. Create and activate virtual environment
 python -m venv lab_01
-source lab_01/bin/activate        # Windows: lab_01\Scripts\activate
+source lab_01/bin/activate       
 
 # 3. Install dependencies
 pip install -r requirements.txt
-pip install pytest pytest-cov pytest-html flake8
 
-# 4a. Run pytest (with coverage)
+# 4a. Run pytest
 pytest --cov=src --cov-report=term -v
 
 # 4b. Run unittests
 python -m unittest test.test_unittest -v
 
-# 4c. Run linter
-flake8 src/ test/ --max-line-length=88
 ```
 
 CI runs automatically on every push. Check the **Actions** tab for results.
